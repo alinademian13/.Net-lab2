@@ -78,18 +78,18 @@ namespace Lab2.Controllers
         }
 
         [HttpGet]
-        public IEnumerable<Expense> Get([FromQuery]DateTime? start, [FromQuery]DateTime? end, [FromQuery]TypeEnum? type)
+        public IEnumerable<Expense> Get([FromQuery]DateTime? from, [FromQuery]DateTime? to, [FromQuery]TypeEnum? type)
         {
             IEnumerable<Expense> result = context.Expenses.Include(expense => expense.Comments);
 
-            if (start != null)
+            if (from != null)
             {
-                result = result.Where(expense => expense.Date >= start);
+                result = result.Where(expense => expense.Date >= from);
             }
 
-            if (end != null)
+            if (to != null)
             {
-                result = result.Where(expense => expense.Date <= end);
+                result = result.Where(expense => expense.Date <= to);
             }
 
             if (type != null)
